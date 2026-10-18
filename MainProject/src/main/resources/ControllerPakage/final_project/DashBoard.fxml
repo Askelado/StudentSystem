@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="720.0" prefWidth="1146.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerPakage.final_project.DashBoardController">
+    <left>
+        <VBox prefWidth="250.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo-text" text="Student System">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+                <Separator prefWidth="200.0">
+                    <VBox.margin><Insets bottom="20.0" top="20.0" /></VBox.margin>
+                </Separator>
+                <Button fx:id="btnAddStudent" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goToAddStudent" prefWidth="250.0" styleClass="nav-button" text="Add Students" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            <Button fx:id="remove" maxWidth="250.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goToRemoveStudents" styleClass="nav-button" text="Remove Students" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+                <Button fx:id="btnAddGrades" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goToAddGrades" prefWidth="250.0" styleClass="nav-button" text="Add Grades " textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+                <Button fx:id="btnViewStudents" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goToViewStudents" prefWidth="250.0" styleClass="nav-button" text="Show Students" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            <Button fx:id="btnShowReports" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#goToShowReports" prefWidth="250.0" styleClass="nav-button" text="Show Reports" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            <Button fx:id="saveData" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#onSavingDate" prefWidth="250.0" styleClass="nav-button" text="Save All Data" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+                <Region VBox.vgrow="ALWAYS" />
+                <Button fx:id="btnLogout" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleLogout" prefWidth="250.0" styleClass="logout-button" text="Log Out" textAlignment="CENTER" />
+            </children>
+            <padding><Insets bottom="20.0" left="10.0" right="10.0" top="30.0" /></padding>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="30.0" styleClass="main-content" BorderPane.alignment="CENTER">
+            <children>
+                <Label styleClass="header-text" text="Main Control Page" />
+
+                <HBox spacing="20.0">
+                    <children>
+                        <VBox styleClass="stat-card">
+                            <Label styleClass="stat-label" text="Total Students" />
+                            <Label fx:id="lblTotalStudents" styleClass="stat-value" text="0" />
+                        </VBox>
+                        <VBox styleClass="stat-card">
+                            <Label styleClass="stat-label" text="Grades Average" />
+                            <Label fx:id="lblAverageGrade" styleClass="stat-value" text="0.0" />
+                        </VBox>
+                        <VBox styleClass="stat-card">
+                            <Label styleClass="stat-label" text="Pass Percent" />
+                            <Label fx:id="lblPassRate" styleClass="stat-value" text="0%" />
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label styleClass="section-title" text="Latest Added Students" textFill="WHITE" />
+                        <TableView fx:id="tableRecentStudents" maxHeight="142.0" prefHeight="232.0" prefWidth="816.0" styleClass="table-view">
+                            <columns>
+                                <TableColumn fx:id="colID" editable="false" prefWidth="205.0" text="ID" />
+                                <TableColumn fx:id="colName" editable="false" prefWidth="400.0" text="Student Name" />
+                                <TableColumn fx:id="colGrade" editable="false" prefWidth="205.0" text="Grade" />
+                            </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </VBox>
+            </children>
+            <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
+        </VBox>
+    </center>
+</BorderPane>

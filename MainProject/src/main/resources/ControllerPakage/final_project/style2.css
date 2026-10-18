@@ -1,0 +1,15 @@
+.table-view {
+    -fx-background-color: #705173;
+    -fx-border-color: #30363d;
+}
+.table-row-cell:odd{
+    -fx-background-color: #5d8b8c;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #317546;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
