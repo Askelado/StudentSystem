@@ -1,0 +1,21 @@
+100         Abdullah Khan                  CS   99.670000      A+
+101       Abdullah Khadir                  CS   67.670000      D+
+102        Ammar Alabdaly                  CS   99.010000      A+
+103       Rayan Almihmady                  CS   71.980000       C
+104         Rayan huraisy                  CS   78.230000      C+
+105         Jaber Aljabry                  CS   89.770000      B+
+106   Muhammad Alshamrany                  CS   93.550000       A
+107       Feras Abdulaziz                  CS   96.000000      A+
+108          Lionel Messi                 Eng   88.110000      B+
+109     Cristiano Ronaldo                 Eng   49.980000       F
+110                Neymar                 Eng   61.000000       D
+111            Ahmed Khan                 Eng   66.230000      D+
+112         Ahmed Bogdadi                  CS  100.000000  SUPER!
+113      Abdullah Alsubhi                 Art   76.330000      C+
+114                Naruto                 Art   87.880000      B+
+115             Jaid From                  CS   95.970000      A+
+116            Homelander                  AI   57.930000       F
+117         Dexter Morgan                  AI   63.310000       D
+118         Arthur Morgan             Teacher   47.110000       F
+119              Jon Snow               Actor   93.670000       A
+120        Winton Overwat               Actor  100.000000  SUPER!

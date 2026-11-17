@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="496.0" styleClass="root-stack" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerPakage.final_project.LoginController">
+
+    <VBox maxWidth="472.0" prefHeight="590.0" prefWidth="472.0" spacing="0" styleClass="login-card" stylesheets="@style.css">
+
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="404.0" spacing="4" styleClass="card-header" stylesheets="@style.css">
+            <padding>
+                <Insets bottom="24" left="40" right="40" top="28" />
+            </padding>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="79.0" styleClass="header-uqu" text="UQU" />
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="111.0" styleClass="header-subtitle" text="student grade app" />
+        </VBox>
+
+        <VBox alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="404.0" spacing="10" styleClass="card-body" stylesheets="@style.css">
+            <padding>
+                <Insets bottom="30" left="40" right="40" top="30" />
+            </padding>
+
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="63.0" styleClass="field-label" text="Username" />
+            <TextField fx:id="usernametxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="250.0" promptText="Enter username" styleClass="input-field">
+            <font>
+               <Font name="Book Antiqua Bold Italic" size="12.0" />
+            </font></TextField>
+
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="86.0" styleClass="field-label" text="Password" />
+            <PasswordField fx:id="passwordtxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="250.0" promptText="Enter password" styleClass="input-field">
+            <font>
+               <Font name="Book Antiqua Bold Italic" size="12.0" />
+            </font></PasswordField>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#forgotpass" prefHeight="19.0" prefWidth="95.0" styleClass="toggle-btn" text="Forgot Password?" />
+
+            <Label fx:id="errorMsg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="error-label" text="" wrapText="true" />
+
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginbtn" prefHeight="36.0" prefWidth="117.0" styleClass="login-btn" text="Login" />
+
+        </VBox>
+    </VBox>
+</StackPane>
