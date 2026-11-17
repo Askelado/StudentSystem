@@ -1,10 +1,7 @@
 package Models;
 
-import java.sql.Connection;
-import java.sql.DriverManager;     // Manages database drivers and establishes the connection
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+
 public class Dao {
 
     public static void main(String[] args) {
@@ -12,141 +9,104 @@ public class Dao {
 
     }
 
-    // Establishes a connection to the SQLite database
-    public void connect() {
-        // JDBC connection string specifying the SQLite driver and database file name
-        String url = "jdbc:sqlite:users.db";
-
-        // 'try-with-resources' block: opens the connection and automatically closes it when done
-        try (Connection con = DriverManager.getConnection(url)) {
-            if (con != null) {
-                System.out.println("database created");
-            }
-        } catch (Exception e) {
-            // throw an exception
-            throw new RuntimeException(e);
-        }
-    }
 
     // Creates the 'users' table in the database if it hasn't been created yet
-    public void createNawTable() {
-        String url = "jdbc:sqlite:contacts.db";
+    public void createNawTable() throws SQLException {
 
         // PRIMARY KEY: auto-incrementing unique identifier | NOT NULL: field cannot be empty | UNIQUE: no duplicate numbers allowed
         String sql = """
-                CREATE TABLE IF NOT EXISTS users (
+                CREATE TABLE IF NOT EXISTS students (
                 ID INTEGER PRIMARY KEY,
                 NAME TEXT NOT NULL,
-                PHONENUM INTEGER NOT NULL UNIQUE,
-                RELATION TEXT NOT NULL
+                MAJOR TEXT NOT NULL,
+                GRADENUM DECIMAL NOT NULL,
+                GRADELETTER TEXT NOT NULL
                 );                
                 """;
 
         // Opens connection and creates a Statement object to run the static SQL command
-        try (Connection con = DriverManager.getConnection(url);
-             Statement stmt = con.createStatement()) {
+            Connection con = connect();
+            Statement stmt = con.createStatement();
             stmt.execute(sql); // Executes the SQL command (used for CREATE, DROP, etc.)
             System.out.println("table created");
-        } catch (Exception e) {
-            // Prints the error description if table creation fails
-            System.out.println(e.getMessage());
-        }
+
     }
 
     // Inserts a new contact row into the 'users' table
-    public void insert(String abdullah, String number, String r) {
-        String url = "jdbc:sqlite:contacts.db";
+    public void insert(String name, String major, Double gradenum, String gradeletter) throws SQLException {
 
         // Parameterized SQL query: '?' act as safe placeholders for values (prevents SQL Injection)
-        String sql = "INSERT INTO users(NAME,PHONENUM,RELATION) VALUES(?,?,?)";
+        String sql = "INSERT INTO students(NAME,MAJOR,GRADENUM,GRADELETTER) VALUES(?,?,?,?)";
+        Connection con = connect();
+        PreparedStatement prst = con.prepareStatement(sql);
+        prst.setString(1,name);
+        prst.setString(2,major);
+        prst.setDouble(3,gradenum);
+        prst.setString(4,gradeletter);
+        prst.executeUpdate();
 
-        // PreparedStatement precompiles the SQL query so values can be safely injected into '?'
-        try (Connection con = DriverManager.getConnection(url);
-             PreparedStatement prst = con.prepareStatement(sql)) {
-
-            // Replaces each '?' placeholder by its 1-based position index
-            prst.setString(1, abdullah); // 1st '?' -> NAME
-            prst.setString(2, number);   // 2nd '?' -> PHONENUM
-            prst.setString(3, r);        // 3rd '?' -> RELATION
-
-            prst.executeUpdate();        // Runs queries that modify data (INSERT, UPDATE, DELETE)
-            System.out.println("inserted");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
-
     // Deletes a specific contact row matching the given ID
-    public void delete(int idd) {
-        String url = "jdbc:sqlite:contacts.db";
-        String sql = "DELETE FROM users\n WHERE ID = ?"; // Deletes only the row where ID matches '?'
+    public void delete(int idd) throws SQLException {
+        Connection con = connect();
+        String sql = "DELETE FROM students\n WHERE ID = ?"; // Deletes only the row where ID matches '?'
 
-        try (Connection con = DriverManager.getConnection(url);
-             PreparedStatement pr = con.prepareStatement(sql)) {
-            pr.setInt(1, idd);    // Binds the integer ID to the 1st '?'
-            pr.executeUpdate();   // Executes the deletion
-            System.out.println("delte is done");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        PreparedStatement prst = con.prepareStatement(sql);
+        prst.setInt(1,idd);
+        prst.executeUpdate();
     }
 
     // Updates a contact's phone number based on their ID (Method Overloading: int, int)
-    public void update(int id, int phoneNum) {
-        String url = "jdbc:sqlite:contacts.db";
-        String sql = """
-                UPDATE users
-                SET PHONENUM=?
-                WHERE ID= ?;
-                """;
-        try (Connection con = DriverManager.getConnection(url);
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, phoneNum); // Replaces 1st '?' (new PHONENUM)
-            stmt.setInt(2, id);       // Replaces 2nd '?' (target ID in WHERE clause)
-            stmt.executeUpdate();     // Commits the update to the database
-            System.out.println("Phone Number Modified");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void update(int id, Student s) {
+//
+//        String sql = """
+//                UPDATE students
+//                SET NAME = ? , MAJOR = ? , GRADENUM = ? , GRADELETTER = ?
+//                WHERE ID= ?;
+//                """;
+//
+//        Connection con = connect();
+//            PreparedStatement stmt = con.prepareStatement(sql);
+//            stmt.setString(1,get);
+//    }
 
     // Updates a contact's name based on their ID (Method Overloading: int, String)
-    public void update(int id, String name) {
-        String url = "jdbc:sqlite:contacts.db";
-        String sql = """
-                UPDATE users
-                SET NAME=?
-                WHERE ID= ?;
-                """;
-        try (Connection con = DriverManager.getConnection(url);
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, name);  // Replaces 1st '?' (new NAME)
-            stmt.setInt(2, id);       // Replaces 2nd '?' (target ID)
-            stmt.executeUpdate();
-            System.out.println("Name Modified");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void update(int id, String name) {
+//        String url = "jdbc:sqlite:contacts.db";
+//        String sql = """
+//                UPDATE users
+//                SET NAME=?
+//                WHERE ID= ?;
+//                """;
+//        try (Connection con = DriverManager.getConnection(url);
+//             PreparedStatement stmt = con.prepareStatement(sql)) {
+//            stmt.setString(1, name);  // Replaces 1st '?' (new NAME)
+//            stmt.setInt(2, id);       // Replaces 2nd '?' (target ID)
+//            stmt.executeUpdate();
+//            System.out.println("Name Modified");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     // Updates a contact's relation based on their ID (Method Overloading: String, int)
-    public void update(String relation, int id) {
-        String url = "jdbc:sqlite:contacts.db";
-        String sql = """
-                UPDATE users
-                SET RELATION=?
-                WHERE ID= ?;
-                """;
-        try (Connection con = DriverManager.getConnection(url);
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, relation); // Replaces 1st '?' (new RELATION)
-            stmt.setInt(2, id);          // Replaces 2nd '?' (target ID)
-            stmt.executeUpdate();
-            System.out.println("Relation Modified");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void update(String relation, int id) {
+//        String url = "jdbc:sqlite:contacts.db";
+//        String sql = """
+//                UPDATE users
+//                SET RELATION=?
+//                WHERE ID= ?;
+//                """;
+//        try (Connection con = DriverManager.getConnection(url);
+//             PreparedStatement stmt = con.prepareStatement(sql)) {
+//            stmt.setString(1, relation); // Replaces 1st '?' (new RELATION)
+//            stmt.setInt(2, id);          // Replaces 2nd '?' (target ID)
+//            stmt.executeUpdate();
+//            System.out.println("Relation Modified");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     // Fetches and prints all rows from the 'users' table
     public void printDate() {
@@ -169,20 +129,12 @@ public class Dao {
             System.out.println(e.getMessage());
         }
     }
-    public Connection connect()
-    {
+    public Connection connect() throws SQLException {
         // JDBC connection string specifying the SQLite driver and database file name
         String url = "jdbc:sqlite:users.db";
 
-        // 'try-with-resources' block: opens the connection and automatically closes it when done
-        try (Connection con = DriverManager.getConnection(url)) {
-            if (con != null) {
-                System.out.println("database created");
-            }
-        } catch (Exception e) {
-            // throw an exception
-            throw new RuntimeException(e);
-        }
+        return DriverManager.getConnection(url);
+
 
     }
 }
