@@ -12,6 +12,7 @@ module org.example.final_project {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires kotlin.stdlib;
+    requires java.sql;
     exports ControllerPakage.final_project;
     opens ControllerPakage.final_project to javafx.fxml;
     exports AppPakage.final_project;
